@@ -1,0 +1,64 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumerate}
+\usepackage{makeidx}
+\usepackage{graphicx}
+\newtheorem{definition}{Definition}
+\theoremstyle{remark}
+\newtheorem{example}{Example}
+\newtheorem{exercise}{Exercise}
+\newtheorem{remark}{Remark}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\author{Hao Peng}
+\title{Condition-based Maintenance--Book chapter proposal}
+\begin{document}
+\maketitle
+Condition-based maintenance (CBM) is one type of preventive maintenance policy. CBM has attracted lots of attentions of both academia and industry due to the development of advanced sensor technology and measurement equipments. The major difference of CBM compared with other maintenance strategies is the utilization of the advanced information about the health status of a component or a system. 
+
+For age-based policy or block replacement policy, the information needed is the failure time distributions of components or systems. For example, in the calculation of age-based policy, we need to know the distribution function of the random lifetime of a component, $F_{T}(\cdot)$. In the calculation of block replacement policy, we need to know the expected number of failures during an interval, $M_{T}(\tau)$, which is also derived based on the failure time distribution. By using the failure time distribution to describe the health status of a component or a system, we assume there are two states for a component or a system, i.e., the failure state and the working state. The random failure time $T$ is the duration of the working state.
+
+For condition-based policies, systems or components have multiple intermediate states in between the failure state and the perfect/newest state. The transition of degradation states can be described by many different types of probability models, e.g., Delay Time model, Markov process. Or, the deterioration of systems may follow a continuous stochastic process, e.g., random coefficient model, gamma process, Wiener process. Then the system state is continuous. Based on the information of degradation processes, the inspection and replacement decisions can be made to optimize the CBM policies. Renewal theory may be used to evaluate the expected total cost rate. Markov decision process is also an analytical tool to formulate the problem. In this chapter, we mainly demonstrate the evaluation of average total cost rate by renewal theory for single-component or multi-component systems. 
+
+\section{Delay Time Model}
+The Delay Time Model (DTM) was first developed by \cite{ChristerWaller84}. It assumes that a component or a system has three states: normal, defective and failed. 
+
+The duration of the normal state, also referred to as the time to defect, is a continuous non-negative random variable denoted by $X$. The duration of the defective state, also referred to as the delay time, is a continuous non-negative random variable denoted by $H$. The cumulative distribution function and the probability density function of the time to defect are denoted by $F_{X}(\cdot)$ and $f_{X}(\cdot)$ respectively. The cumulative distribution function and the probability density function of the delay time are denoted by $F_{H}(\cdot)$ and $f_{H}(\cdot)$ respectively. 
+
+Under the normal state, the system works fine and defects do not exist in the system. Under the defective state, the system still works but the defects of the system appear and can only be detected by inspections. The failure state of the system is self-announcing. The advanced information considered by DTM as we can tell is the defective information obtained through inspections, compared with the age-based policy or block replacement policy. Given such information, we are interested in obtaining the optimal inspection and maintenance policy.
+
+The DTM is an abstract of many engineering systems. Of course, it is a simplified description of complex failure mechanisms. But for most of the cases (see example \ref{ex:DTM}), this simplification works pretty well for maintenance optimization.
+\begin{example} \label{ex:DTM} \renewcommand{\qedsymbol}{$\lozenge$} \mbox{}
+\begin{enumerate}
+\item The condition of ball-bearings can be measured via the amplitude of vibrations around the bearing. After a certain period of operating, the condition of ball-bearings becomes less good and the amplitude of vibrations becomes larger. The engineers define a certain limit of vibration above which the engineers will see the system as ""defective". The system will stay in the defective state for a while till breakdown.
+\item The condition of a metal part can be determined by visually inspecting the number and length of cracks. After a certain period of operating, the condition of a metal part becomes worse. The engineers define a certain criteria for cracks to determine the system state as "defective". The system will stay in the defective state for a while till breakdown.
+\item For metal systems with moving parts, the concentration of ferrous parts in the lubrication fluid is measured as an indication of the wear. After a certain period of operating, the concentration of ferrous parts becomes larger. The engineers define a certain limit for this concentration measurement above which the system is seen as "defective". The system will stay in this defective state for a while till breakdown.
+\end{enumerate}
+\qed
+\end{example}
+\section{Degradation Models}
+
+If the degradation of the condition of a component or a system can be described as a stochastic process over time, we can propose maintenance models based on the probability models of the degradation processes. There are many degradation processes that can be used to describe the changes of the condition of a component or a system. To specify which degradation process is the most appropriate one, we first have to collect information of the failure or degradation mechanism of the component or the system. Hopefully we can get the basic characteristics of the degradation mechanism to screen out the not-appropriate degradation models. The degradation data can be obtained from the reliability testings in labs or from the operating fields. Statistical techniques should be used to estimate the parameters of the degradation models and do the fitting test. Then a suitable degradation model can be selected. For a literature review on the degradation models, see \cite{ZhuPengvanHoutum14}. 
+
+In this section, we consider the cases for which the condition of a component can be represented by one variable. Then a stochastic process $\{X(t),t\geq 0\}$ can describe the degradation process of the condition of a component. If the degradation level $X(\cdot)$ passes a certain failure limit $H$, we assume that a failure will happen. This failure can be either a \textit{soft failure} or a \textit{hard failure}. We define a \textit{soft failure} as a failure that will not stop the operation of a system immediately, but will incur extra costs, such as quality loss cost or low performance cost. A \textit{hard failure} is a failure that will stop the operation of a system immediately. 
+
+Here are several examples of degrading systems.
+
+\begin{example}\label{ex:Degradation1} \renewcommand{\qedsymbol}{$\lozenge$} \mbox{}  
+
+\begin{enumerate}
+\item Consider a Micro-Electro-Mechanical System (MEMS) containing one microengine that is subject to wear.  Furthermore, the failure of the microengine causes the failure of the system.  The failure of the microengine occurs when the wear volume of material reaches a critical threshold.  The wear volume of material can be estimated by measuring the volume of the wear debris or the missing volume in the worn device.  For example, a Focused Ion Beam system is effective to evaluate the amount of wear debris by producing cross sections of the precise area of interest in MEMS structures \cite{PengFengCoit09}.
+
+\item For light display devices, such as plasma display panels (PDPs), vacuum fluorescent displays (VFDs) and fluorescent lamps (FLs), the critical performance characteristic is the luminosity that is related to brightness. Failure of such devices has been traditionally defined in terms of the degradation in luminosity over time. For example, the industry standard definition for PDP lifetime is the time at which the PDP luminosity falls below $50\%$ of its initial luminosity. Failure of FLs is defined as the time when a lamp’s luminosity falls below $60\%$ of its luminosity. \cite{FengPengCoit10}.
+
+\end{enumerate}
+\qed
+\end{example}
+\bibliographystyle{plain}
+%\bibliography{peng}
+\include{rat}
+\end{document}
